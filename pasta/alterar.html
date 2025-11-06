@@ -2,63 +2,58 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alterar </title>
-
+<title>Alterar Registro</title>
 <style>
     body {
-        background: linear-gradient(135deg, #ffe6f0, #f3e8ff);
-        font-family: "Poppins", sans-serif;
+        background-color: #f6e4f5;
+        font-family: Arial, sans-serif;
         display: flex;
         align-items: center;
         justify-content: center;
         height: 100vh;
     }
-
     .box {
-        background-color: white;
+        background: white;
         padding: 25px;
-        border-radius: 20px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        text-align: center;
+        border-radius: 15px;
+        box-shadow: 0 0 10px #ccc;
         width: 300px;
+        text-align: center;
     }
-
-    input {
-        width: 90%;
-        padding: 10px;
-        margin: 8px 0;
-        border: 1px solid #d58adf;
-        border-radius: 10px;
-    }
-
-    button, a {
-        display: inline-block;
+    input, button, a {
         margin-top: 10px;
-        background-color: #d58adf;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 10px;
-        text-decoration: none;
-        font-weight: bold;
-        cursor: pointer;
+        padding: 8px;
+        width: 90%;
+        border-radius: 8px;
+        border: 1px solid #ccc;
     }
-
-    button:hover, a:hover {
-        background-color: #c06cd1;
+    button {
+        background-color: #a14ca1;
+        color: white;
+        border: none;
+        font-weight: bold;
+    }
+    a {
+        display: inline-block;
+        text-decoration: none;
+        background-color: #ccc;
+        color: black;
+        text-align: center;
+    }
+    button:hover {
+        background-color: #8e3b8e;
     }
 </style>
 </head>
 <body>
     <div class="box">
-        <h2> Alterar Nome</h2>
-        <input type="text" placeholder="Nome antigo...">
-        <input type="text" placeholder="Novo nome...">
-        <br>
-        <button>Salvar alteração</button>
-        <br>
-        <a href="index.html"> Voltar ao menu</a>
+        <h2>Alterar Registro</h2>
+        <form>
+            <input type="text" placeholder="Nome antigo"><br>
+            <input type="text" placeholder="Novo nome"><br>
+            <button type="submit">Alterar</button><br>
+            <a href="index.html">Voltar</a>
+        </form>
     </div>
 </body>
 </html>

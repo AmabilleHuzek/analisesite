@@ -2,67 +2,57 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Incluir </title>
-
+<title>Incluir Registro</title>
 <style>
     body {
-        background: linear-gradient(135deg, #ffe6f0, #f3e8ff);
-        font-family: "Poppins", sans-serif;
+        background-color: #f6e4f5;
+        font-family: Arial, sans-serif;
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
         height: 100vh;
-        margin: 0;
     }
-
     .box {
-        background-color: white;
+        background: white;
         padding: 25px;
-        border-radius: 20px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        text-align: center;
+        border-radius: 15px;
+        box-shadow: 0 0 10px #ccc;
         width: 300px;
+        text-align: center;
     }
-
-    input {
-        width: 90%;
-        padding: 10px;
+    input, button, a {
         margin-top: 10px;
-        border: 1px solid #d58adf;
-        border-radius: 10px;
-        outline: none;
+        padding: 8px;
+        width: 90%;
+        border-radius: 8px;
+        border: 1px solid #ccc;
     }
-
-    button, a {
-        display: inline-block;
-        margin-top: 15px;
-        background-color: #d58adf;
+    button {
+        background-color: #a14ca1;
         color: white;
-        padding: 10px 20px;
         border: none;
-        border-radius: 10px;
-        text-decoration: none;
         font-weight: bold;
-        cursor: pointer;
-        transition: 0.3s;
     }
-
-    button:hover, a:hover {
-        background-color: #c06cd1;
-        transform: scale(1.05);
+    a {
+        display: inline-block;
+        text-decoration: none;
+        background-color: #ccc;
+        color: black;
+        text-align: center;
+    }
+    button:hover {
+        background-color: #8e3b8e;
     }
 </style>
 </head>
 <body>
     <div class="box">
-        <h2> Incluir Nome</h2>
-        <input type="text" placeholder="Digite um nome...">
-        <br>
-        <button>Salvar</button>
-        <br>
-        <a href="index.html">⬅️ Voltar ao menu</a>
+        <h2>Incluir Registro</h2>
+        <form>
+            <input type="text" placeholder="Digite o nome"><br>
+            <button type="submit">Salvar</button><br>
+            <a href="index.html">Voltar</a>
+        </form>
     </div>
 </body>
 </html>
