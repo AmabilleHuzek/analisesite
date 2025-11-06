@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema Simples</title>
+
+<!-- ===== CSS ===== -->
+<style>
+    * {
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
+    }
+
+    h1 {
+        margin-top: 40px;
+        color: #333;
+    }
+
+    .container {
+        background: white;
+        padding: 20px;
+        margin-top: 20px;
+        width: 90%;
+        max-width: 400px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 15px;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    button {
+        flex: 1 1 48%;
+        padding: 10px;
+        margin: 5px 0;
+        border: none;
+        border-radius: 5px;
+        background-color: #3498db;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background-color: #2980b9;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 15px;
+    }
+
+    li {
+        background-color: #eee;
+        padding: 10px;
+        margin-bottom: 8px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    li:hover {
+        background-color: #d6ebff;
+    }
+
+    li.selecionado {
+        background-color: #aee0ff;
+    }
+</style>
+</head>
+
+<body>
+    <h1>Cadastro Simples</h1>
+
+    <div class="container">
+        <input type="text" id="campoNome" placeholder="Digite um nome">
+
+        <div class="buttons">
+            <button onclick="incluir()">Incluir</button>
+            <button onclick="alterar()">Alterar</button>
+            <button onclick="excluir()">Excluir</button>
+            <button onclick="consultar()">Consultar</button>
+        </div>
+
+        <ul id="lista"></ul>
+    </div>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+    let nomes = [];
+    let selecionado = -1;
+
+    // Atualiza a lista visual
+    function atualizarLista(filtro = "") {
+        const lista = document.getElementById("lista");
+        lista.innerHTML = "";
+        nomes.forEach((nome, i) => {
+            if (nome.toLowerCase().includes(filtro.toLowerCase())) {
+                const li = document.createElement("li");
+                li.textContent = nome;
+                li.onclick = () => selecionar(i);
+                if (i === selecionado) li.classList.add("selecionado");
+                lista.appendChild(li);
+            }
+        });
+    }
+
+    // Selecionar item da lista
+    function selecionar(index) {
+        selecionado = index;
+        document.getElementById("campoNome").value = nomes[index];
+        atualizarLista();
+    }
+
+    // Incluir novo nome
+    function incluir() {
+        const nome = document.getElementById("campoNome").value.trim();
+        if (nome === "") {
+            alert("Digite um nome!");
+            return;
+        }
+        nomes.push(nome);
+        document.getElementById("campoNome").value = "";
+        atualizarLista();
+    }
+
+    // Alterar nome selecionado
+    function alterar() {
+        if (selecionado === -1) {
+            alert("Selecione um item para alterar!");
+            return;
+        }
+        const novoNome = document.getElementById("campoNome").value.trim();
+        if (novoNome === "") {
+            alert("Digite o novo nome!");
+            return;
+        }
+        nomes[selecionado] = novoNome;
+        selecionado = -1;
+        document.getElementById("campoNome").value = "";
+        atualizarLista();
+    }
+
+    // Excluir nome selecionado
+    function excluir() {
+        if (selecionado === -1) {
+            alert("Selecione um item para excluir!");
+            return;
+        }
+        nomes.splice(selecionado, 1);
+        selecionado = -1;
+        document.getElementById("campoNome").value = "";
+        atualizarLista();
+    }
+
+    // Consultar (filtrar nomes)
+    function consultar() {
+        const filtro = document.getElementById("campoNome").value.trim();
+        atualizarLista(filtro);
+    }
+</script>
+</body>
+</html>
