@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sistema Simples</title>
+<title>Cadastro de Nomes</title>
 
 <!-- ===== CSS ===== -->
 <style>
     * {
         box-sizing: border-box;
-        font-family: Arial, sans-serif;
+        font-family: "Poppins", sans-serif;
     }
 
     body {
-        background-color: #f4f4f4;
+        background: linear-gradient(135deg, #ffe6f0, #f3e8ff);
         margin: 0;
         padding: 0;
         display: flex;
@@ -25,98 +25,118 @@
 
     h1 {
         margin-top: 40px;
-        color: #333;
+        color: #b84b9e;
+        text-shadow: 1px 1px 2px #fff;
     }
 
     .container {
-        background: white;
-        padding: 20px;
+        background: #fff;
+        padding: 25px;
         margin-top: 20px;
         width: 90%;
         max-width: 400px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        border-radius: 20px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
     input {
         width: 100%;
         padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #e3c4f0;
+        border-radius: 10px;
         font-size: 15px;
+        outline: none;
+        transition: 0.3s;
+    }
+
+    input:focus {
+        border-color: #d58adf;
+        box-shadow: 0 0 5px #e0aaff;
     }
 
     .buttons {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
+        gap: 8px;
     }
 
     button {
         flex: 1 1 48%;
         padding: 10px;
-        margin: 5px 0;
         border: none;
-        border-radius: 5px;
-        background-color: #3498db;
+        border-radius: 10px;
+        background-color: #d58adf;
         color: white;
         font-size: 15px;
+        font-weight: bold;
         cursor: pointer;
         transition: 0.3s;
     }
 
     button:hover {
-        background-color: #2980b9;
+        background-color: #c06cd1;
     }
 
     ul {
         list-style: none;
         padding: 0;
         margin-top: 15px;
+        max-height: 200px;
+        overflow-y: auto;
     }
 
     li {
-        background-color: #eee;
+        background-color: #ffe6f7;
         padding: 10px;
         margin-bottom: 8px;
-        border-radius: 5px;
+        border-radius: 8px;
         cursor: pointer;
+        border: 1px solid #f5c6e7;
         transition: 0.2s;
     }
 
     li:hover {
-        background-color: #d6ebff;
+        background-color: #ffd9f2;
     }
 
     li.selecionado {
-        background-color: #aee0ff;
+        background-color: #f3b4e3;
+        color: white;
+    }
+
+    footer {
+        margin-top: 40px;
+        color: #777;
+        font-size: 13px;
     }
 </style>
 </head>
 
 <body>
-    <h1>Cadastro Simples</h1>
+    <h1>💗 Cadastro de Nomes 💗</h1>
 
     <div class="container">
-        <input type="text" id="campoNome" placeholder="Digite um nome">
+        <input type="text" id="campoNome" placeholder="Digite um nome...">
 
         <div class="buttons">
-            <button onclick="incluir()">Incluir</button>
-            <button onclick="alterar()">Alterar</button>
-            <button onclick="excluir()">Excluir</button>
-            <button onclick="consultar()">Consultar</button>
+            <button onclick="incluir()">➕ Incluir</button>
+            <button onclick="alterar()">✏️ Alterar</button>
+            <button onclick="excluir()">🗑️ Excluir</button>
+            <button onclick="consultar()">🔍 Consultar</button>
         </div>
 
         <ul id="lista"></ul>
     </div>
+
+    <footer>Feito com 💕 para treinar HTML e CSS</footer>
 
 <!-- ===== JAVASCRIPT ===== -->
 <script>
     let nomes = [];
     let selecionado = -1;
 
-    // Atualiza a lista visual
     function atualizarLista(filtro = "") {
         const lista = document.getElementById("lista");
         lista.innerHTML = "";
@@ -131,14 +151,12 @@
         });
     }
 
-    // Selecionar item da lista
     function selecionar(index) {
         selecionado = index;
         document.getElementById("campoNome").value = nomes[index];
         atualizarLista();
     }
 
-    // Incluir novo nome
     function incluir() {
         const nome = document.getElementById("campoNome").value.trim();
         if (nome === "") {
@@ -150,10 +168,9 @@
         atualizarLista();
     }
 
-    // Alterar nome selecionado
     function alterar() {
         if (selecionado === -1) {
-            alert("Selecione um item para alterar!");
+            alert("Selecione um nome da lista!");
             return;
         }
         const novoNome = document.getElementById("campoNome").value.trim();
@@ -167,10 +184,9 @@
         atualizarLista();
     }
 
-    // Excluir nome selecionado
     function excluir() {
         if (selecionado === -1) {
-            alert("Selecione um item para excluir!");
+            alert("Selecione um nome para excluir!");
             return;
         }
         nomes.splice(selecionado, 1);
@@ -179,7 +195,6 @@
         atualizarLista();
     }
 
-    // Consultar (filtrar nomes)
     function consultar() {
         const filtro = document.getElementById("campoNome").value.trim();
         atualizarLista(filtro);
