@@ -2,52 +2,139 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Página Inicial</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema Simples de Cadastro</title>
 <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: #f6e4f5;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
+        background-color: #f2f2f2;
+        padding: 20px;
     }
     h1 {
-        color: #a14ca1;
-    }
-    .menu {
-        background: white;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 0 10px #ccc;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        width: 250px;
-    }
-    a {
-        text-decoration: none;
-        background-color: #a14ca1;
-        color: white;
-        padding: 10px;
-        border-radius: 8px;
         text-align: center;
-        font-weight: bold;
     }
-    a:hover {
-        background-color: #8e3b8e;
+    .container {
+        background-color: white;
+        max-width: 400px;
+        margin: auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #ccc;
+    }
+    input {
+        width: 100%;
+        padding: 8px;
+        margin: 8px 0;
+        border: 1px solid #aaa;
+        border-radius: 5px;
+    }
+    button {
+        margin: 5px;
+        padding: 10px 15px;
+        border: none;
+        background-color: #3498db;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #2980b9;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+    li {
+        background-color: #eee;
+        margin: 5px 0;
+        padding: 8px;
+        border-radius: 5px;
     }
 </style>
 </head>
 <body>
-    <h1>Sistema de Cadastro</h1>
-    <div class="menu">
-        <a href="incluir.html">Incluir</a>
-        <a href="alterar.html">Alterar</a>
-        <a href="excluir.html">Excluir</a>
-        <a href="consultar.html">Consultar</a>
+    <h1>Cadastro de Nomes</h1>
+    <div class="container">
+        <input type="text" id="nome" placeholder="Digite um nome">
+        <div>
+            <button onclick="incluir()">Incluir</button>
+            <button onclick="alterar()">Alterar</button>
+            <button onclick="excluir()">Excluir</button>
+            <button onclick="consultar()">Consultar</button>
+        </div>
+        <h3>Lista:</h3>
+        <ul id="lista"></ul>
     </div>
+
+<script>
+    let nomes = [];
+    let selecionado = -1;
+
+    function atualizarLista() {
+        const lista = document.getElementById("lista");
+        lista.innerHTML = "";
+        nomes.forEach((nome, index) => {
+            const li = document.createElement("li");
+            li.textContent = nome;
+            li.onclick = () => selecionar(index);
+            if (index === selecionado) li.style.backgroundColor = "#d1f0ff";
+            lista.appendChild(li);
+        });
+    }
+
+    function incluir() {
+        const nome = document.getElementById("nome").value.trim();
+        if (nome) {
+            nomes.push(nome);
+            document.getElementById("nome").value = "";
+            atualizarLista();
+        } else {
+            alert("Digite um nome antes de incluir!");
+        }
+    }
+
+    function selecionar(index) {
+        selecionado = index;
+        document.getElementById("nome").value = nomes[index];
+        atualizarLista();
+    }
+
+    function alterar() {
+        if (selecionado === -1) {
+            alert("Selecione um nome para alterar!");
+            return;
+        }
+        const novoNome = document.getElementById("nome").value.trim();
+        if (novoNome) {
+            nomes[selecionado] = novoNome;
+            selecionado = -1;
+            document.getElementById("nome").value = "";
+            atualizarLista();
+        }
+    }
+
+    function excluir() {
+        if (selecionado === -1) {
+            alert("Selecione um nome para excluir!");
+            return;
+        }
+        nomes.splice(selecionado, 1);
+        selecionado = -1;
+        document.getElementById("nome").value = "";
+        atualizarLista();
+    }
+
+    function consultar() {
+        const nome = document.getElementById("nome").value.trim().toLowerCase();
+        const resultado = nomes.filter(n => n.toLowerCase().includes(nome));
+        const lista = document.getElementById("lista");
+        lista.innerHTML = "";
+        resultado.forEach(nome => {
+            const li = document.createElement("li");
+            li.textContent = nome;
+            lista.appendChild(li);
+        });
+    }
+</script>
 </body>
 </html>
